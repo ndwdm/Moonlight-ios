@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct MainContentView: View {
+    //@Environment(\.requestReview) private var requestReview
+    @Environment(\.scenePhase) var scenePhase
+    @AppStorage("launchAppCount") private var launchAppCount = 0
+
     @State private var statusBarIsHidden = true
     @ObservedObject private var viewModel = MoonlightViewModel()
 
@@ -24,11 +29,14 @@ struct MainContentView: View {
         AnimatedSplashScreen(animationTiming: 3) {
             ScrollView {
                 VStack(spacing: 15) {
+                    Text("Tap on the Moon to enable AR mode")
+                        .font(.subheadline)
                     Text(viewModel.selectedDate, style: .date)
                         .font(.title)
                     Text("Moon Day: \(Int(viewModel.currentMoonPhaseValue.rounded(.up))) " + Int(viewModel.currentMoonPhaseValue.rounded(.up)).symbolForMoon)
                         .font(.subheadline)
-                }            }
+                }
+            }
         } onAnimationEnd: {
             statusBarIsHidden = false
         }
@@ -36,6 +44,19 @@ struct MainContentView: View {
         .onChange(of: viewModel.currentMoonPhaseValue) { _ in }
         .environmentObject(viewModel)
         .gesture(dragGesture)
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                launchAppCount += 1
+                if launchAppCount % 3 == 0 {
+                    //requestReview()
+                    if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                        DispatchQueue.main.async {
+                            SKStoreReviewController.requestReview(in: scene)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
