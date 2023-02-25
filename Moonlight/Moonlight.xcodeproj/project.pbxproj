@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35B7581229AA409400C94902 /* moonAR.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B7581129AA409300C94902 /* moonAR.scnassets */; };
+		35B7581429AA41FE00C94902 /* MoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7581329AA41FE00C94902 /* MoonViewController.swift */; };
 		35C2F2802976CA7B0015860F /* MoonlightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2F27F2976CA7B0015860F /* MoonlightApp.swift */; };
 		35C2F2822976CA7B0015860F /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2F2812976CA7B0015860F /* MainContentView.swift */; };
 		35C2F2842976CA7F0015860F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35C2F2832976CA7F0015860F /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35B7581129AA409300C94902 /* moonAR.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = moonAR.scnassets; sourceTree = "<group>"; };
+		35B7581329AA41FE00C94902 /* MoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonViewController.swift; sourceTree = "<group>"; };
 		35C2F27C2976CA7B0015860F /* Moonlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moonlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35C2F27F2976CA7B0015860F /* MoonlightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonlightApp.swift; sourceTree = "<group>"; };
 		35C2F2812976CA7B0015860F /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				35C2F2832976CA7F0015860F /* Assets.xcassets */,
+				35B7581129AA409300C94902 /* moonAR.scnassets */,
 				35C2F2DE2977FF710015860F /* moonVideo.mov */,
 			);
 			path = Resources;
@@ -199,6 +204,7 @@
 			children = (
 				35C2F2812976CA7B0015860F /* MainContentView.swift */,
 				35C2F2DC2977FED40015860F /* MoonView.swift */,
+				35B7581329AA41FE00C94902 /* MoonViewController.swift */,
 				35C2F2AE2976CC690015860F /* MoonlightViewModel.swift */,
 			);
 			path = Main;
@@ -309,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35C2F2872976CA7F0015860F /* Preview Assets.xcassets in Resources */,
+				35B7581229AA409400C94902 /* moonAR.scnassets in Resources */,
 				35C2F2842976CA7F0015860F /* Assets.xcassets in Resources */,
 				35C2F2DF2977FF710015860F /* moonVideo.mov in Resources */,
 			);
@@ -337,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35B7581429AA41FE00C94902 /* MoonViewController.swift in Sources */,
 				35C2F2E52979AFAC0015860F /* Int+Extensions.swift in Sources */,
 				35C2F2AF2976CC690015860F /* MoonlightViewModel.swift in Sources */,
 				35C2F2822976CA7B0015860F /* MainContentView.swift in Sources */,
@@ -507,6 +515,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Moonlight/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses your camera for AR moon position showing";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -543,6 +552,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Moonlight/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses your camera for AR moon position showing";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
