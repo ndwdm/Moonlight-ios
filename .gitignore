@@ -89,3 +89,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+Moonlight/Moonlight.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+Moonlight/Moonlight.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+Moonlight/Moonlight.xcodeproj/xcshareddata/xcschemes/Moonlight.xcscheme

@@ -26,6 +26,12 @@
 		35C2F2DF2977FF710015860F /* moonVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 35C2F2DE2977FF710015860F /* moonVideo.mov */; };
 		35C2F2E3297935030015860F /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2F2E2297935030015860F /* Date+Extensions.swift */; };
 		35C2F2E52979AFAC0015860F /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2F2E42979AFAC0015860F /* Int+Extensions.swift */; };
+		35C67C722A9A1C0000C83E96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35C67C712A9A1C0000C83E96 /* GoogleService-Info.plist */; };
+		35C67C752A9A20D000C83E96 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C742A9A20D000C83E96 /* FirebaseAnalytics */; };
+		35C67C772A9A20D000C83E96 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C762A9A20D000C83E96 /* FirebaseCrashlytics */; };
+		35C67C7A2A9A258D00C83E96 /* YandexMobileAdsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C792A9A258D00C83E96 /* YandexMobileAdsPackage */; };
+		35C67C7C2A9A279800C83E96 /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35C67C7B2A9A279800C83E96 /* YandexMobileAdsBundle.bundle */; };
+		35C67C7F2A9A291F00C83E96 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C7E2A9A291F00C83E96 /* GoogleMobileAds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +76,8 @@
 		35C2F2DE2977FF710015860F /* moonVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = moonVideo.mov; sourceTree = "<group>"; };
 		35C2F2E2297935030015860F /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		35C2F2E42979AFAC0015860F /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		35C67C712A9A1C0000C83E96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		35C67C7B2A9A279800C83E96 /* YandexMobileAdsBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YandexMobileAdsBundle.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35C67C7F2A9A291F00C83E96 /* GoogleMobileAds in Frameworks */,
+				35C67C752A9A20D000C83E96 /* FirebaseAnalytics in Frameworks */,
+				35C67C772A9A20D000C83E96 /* FirebaseCrashlytics in Frameworks */,
+				35C67C7A2A9A258D00C83E96 /* YandexMobileAdsPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +112,7 @@
 		35C2F2732976CA7B0015860F = {
 			isa = PBXGroup;
 			children = (
+				35C67C7B2A9A279800C83E96 /* YandexMobileAdsBundle.bundle */,
 				35C2F27E2976CA7B0015860F /* Moonlight */,
 				35C2F28F2976CA7F0015860F /* MoonlightTests */,
 				35C2F2992976CA7F0015860F /* MoonlightUITests */,
@@ -121,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				35C2F2B42976D09C0015860F /* Info.plist */,
+				35C67C712A9A1C0000C83E96 /* GoogleService-Info.plist */,
 				35C2F2AB2976CB480015860F /* Application */,
 				35C2F2A92976CB470015860F /* Scenes */,
 				35C2F2AA2976CB480015860F /* Utils */,
@@ -230,6 +244,12 @@
 			dependencies = (
 			);
 			name = Moonlight;
+			packageProductDependencies = (
+				35C67C742A9A20D000C83E96 /* FirebaseAnalytics */,
+				35C67C762A9A20D000C83E96 /* FirebaseCrashlytics */,
+				35C67C792A9A258D00C83E96 /* YandexMobileAdsPackage */,
+				35C67C7E2A9A291F00C83E96 /* GoogleMobileAds */,
+			);
 			productName = Moonlight;
 			productReference = 35C2F27C2976CA7B0015860F /* Moonlight.app */;
 			productType = "com.apple.product-type.application";
@@ -303,6 +323,11 @@
 				ru,
 			);
 			mainGroup = 35C2F2732976CA7B0015860F;
+			packageReferences = (
+				35C67C732A9A20D000C83E96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				35C67C782A9A258D00C83E96 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */,
+				35C67C7D2A9A291F00C83E96 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			productRefGroup = 35C2F27D2976CA7B0015860F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -319,11 +344,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35C67C7C2A9A279800C83E96 /* YandexMobileAdsBundle.bundle in Resources */,
 				3538BDE82A920AAB0009B458 /* Localizable.strings in Resources */,
 				35C2F2872976CA7F0015860F /* Preview Assets.xcassets in Resources */,
 				35B7581229AA409400C94902 /* moonAR.scnassets in Resources */,
 				35C2F2842976CA7F0015860F /* Assets.xcassets in Resources */,
 				35C2F2DF2977FF710015860F /* moonVideo.mov in Resources */,
+				35C67C722A9A1C0000C83E96 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +488,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -514,6 +542,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -711,6 +740,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		35C67C732A9A20D000C83E96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		35C67C782A9A258D00C83E96 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/yandex-ads-sdk-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		35C67C7D2A9A291F00C83E96 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35C67C742A9A20D000C83E96 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35C67C732A9A20D000C83E96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		35C67C762A9A20D000C83E96 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35C67C732A9A20D000C83E96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		35C67C792A9A258D00C83E96 /* YandexMobileAdsPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35C67C782A9A258D00C83E96 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */;
+			productName = YandexMobileAdsPackage;
+		};
+		35C67C7E2A9A291F00C83E96 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35C67C7D2A9A291F00C83E96 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 35C2F2742976CA7B0015860F /* Project object */;
 }

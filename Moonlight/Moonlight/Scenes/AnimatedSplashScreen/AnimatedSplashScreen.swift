@@ -51,12 +51,13 @@ struct AnimatedSplashScreen<Content: View>: View {
                                 .onChange(of: viewModel.currentMoonPhaseValue) { _ in }
                         }
                         .ignoresSafeArea(.container, edges: .all)
-                        ZStack(alignment: .bottom) {
-                            content
-                                .padding(.bottom, animateContent ? size.height: 50)
-                        }
                     }
-                    .frame(maxHeight: .infinity, alignment: .top )
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    ZStack {
+                            content
+                            .padding(.bottom, animateContent ? size.height : proxy.size.height / 2)
+                    }
+                    .offset(y: proxy.size.height / 2 - 40)
                 }
                 .transition(.identity)
                 .ignoresSafeArea(.container, edges: .all)

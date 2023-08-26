@@ -26,8 +26,16 @@ struct MainContentView: View {
                 }
             }
         AnimatedSplashScreen(animationTiming: 2) {
-            VStack(spacing: 15) {
-
+            VStack(
+                alignment: .center,
+                spacing: 0
+            ) {
+                Text(viewModel.selectedDate, style: .date)
+                    .font(.title)
+                Text("\(NSLocalizedString("General.moonDay", comment: "")): \(Int(viewModel.currentMoonPhaseValue.rounded(.up))) " + Int(viewModel.currentMoonPhaseValue.rounded(.up)).symbolForMoon)
+                    .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
                 HStack {
                     Image("tap")
                         .resizable()
@@ -40,6 +48,7 @@ struct MainContentView: View {
                 }
 
                 HStack {
+                    Spacer()
                     Image("swipe")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -48,9 +57,7 @@ struct MainContentView: View {
                         .font(.subheadline)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                }
 
-                HStack {
                     Image("pinch")
                         .resizable()
                         .frame(width: 50, height: 50)
@@ -59,15 +66,10 @@ struct MainContentView: View {
                         .font(.subheadline)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
+                    Spacer()
                 }
-
-                Text(viewModel.selectedDate, style: .date)
-                    .font(.title)
-                Text("\(NSLocalizedString("General.moonDay", comment: "")): \(Int(viewModel.currentMoonPhaseValue.rounded(.up))) " + Int(viewModel.currentMoonPhaseValue.rounded(.up)).symbolForMoon)
-                    .font(.subheadline)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
             }
+            .padding(0)
         } onAnimationEnd: {}
         .onChange(of: viewModel.currentMoonPhaseValue) { _ in }
         .environmentObject(viewModel)

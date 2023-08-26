@@ -11,6 +11,8 @@ import AVFAudio
 import Combine
 import SceneKit
 import ARKit
+import GoogleMobileAds
+import YandexMobileAds
 
 enum MoonMode {
     case main
@@ -19,6 +21,21 @@ enum MoonMode {
 
 final class MoonViewController: UIViewController {
     fileprivate var viewModel: MoonlightViewModel?
+    let adBannerID = "ca-app-pub-7596340865562529/5693808324"
+    let testADBannerID = "ca-app-pub-3940256099942544/2934735716" // special google test id for banners
+    let yandexAppID = "2753133"
+    let yandexADBannerID = "R-M-2753133-1"
+
+    private var bannerView: GADBannerView!
+    private let yandexADView: YMANativeBannerView = {
+        let adView = YMANativeBannerView()
+        return adView
+    }()
+    private lazy var adLoader: YMANativeAdLoader = {
+        let adLoader = YMANativeAdLoader()
+        adLoader.delegate = self
+        return adLoader
+    }()
 
     private var arMode = false
     private let configuration = ARWorldTrackingConfiguration()
@@ -68,13 +85,16 @@ private extension MoonViewController {
         setupScene()
         setupAR()
         enableMoonZoom()
+
+        setupGoogleBannerAd()
+        setupYandexNativeBannerAd()
     }
 
     func setupScene() {
         let moonModeSelectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(moonModeSelect))
         view.addGestureRecognizer(moonModeSelectGestureRecognizer)
 
-        setupMoon(for: moonNode, with: 1.3)
+        setupMoon(for: moonNode, with: 1.2)
         shadowingMoon(for: moonNode, mode: .main)
 
         mainMoonSceneView = SCNView(frame: .init(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 2))
@@ -88,7 +108,7 @@ private extension MoonViewController {
         let camera = SCNCamera()
         let cameraNode = SCNNode()
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3(x: 0.0, y: 0.0, z: 0.3)
+        cameraNode.position = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
 
         let constraint = SCNLookAtConstraint(target: moonNode)
         constraint.isGimbalLockEnabled = true
@@ -210,6 +230,37 @@ private extension MoonViewController {
         directLightNode.eulerAngles = newVector
         directARLightNode.eulerAngles = newVector
     }
+
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        view.addSubview(bannerView)
+        bannerView.layer.zPosition = 10
+        bannerView.frame.origin.y = view.frame.height - 220
+        bannerView.center.x = view.center.x
+       }
+
+    func setupGoogleBannerAd() {
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        addBannerViewToView(bannerView)
+        bannerView.adUnitID = adBannerID // testADBannerID
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
+    }
+
+    func setupYandexNativeBannerAd() {
+        let requestConfiguration = YMANativeAdRequestConfiguration(adUnitID: yandexADBannerID)
+        adLoader.loadAd(with: requestConfiguration)
+
+        view.addSubview(yandexADView)
+        yandexADView.frame.size.width = view.frame.size.width
+        yandexADView.frame.origin.y = view.frame.height - 160
+        yandexADView.center.x = view.center.x
+    }
+
+    func bindNativeAd(_ ad: YMANativeAd) {
+        ad.delegate = self
+        yandexADView.ad = ad
+    }
 }
 
 
@@ -219,4 +270,64 @@ extension MoonViewController: ARSCNViewDelegate {
     func sessionWasInterrupted(_ session: ARSession) {}
 
     func sessionInterruptionEnded(_ session: ARSession) {}
+}
+
+extension MoonViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            bannerView.alpha = 1
+        })
+    }
+
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+
+    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {}
+
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {}
+
+    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {}
+
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {}
+}
+
+// MARK: - YMANativeAdLoaderDelegate
+extension MoonViewController: YMANativeAdLoaderDelegate {
+    func nativeAdLoader(_ loader: YMANativeAdLoader, didLoad ad: YMANativeAd) {
+        print(#function)
+        bindNativeAd(ad)
+    }
+
+    func nativeAdLoader(_ loader: YMANativeAdLoader, didFailLoadingWithError error: Error) {
+        print(#function + "Error: \(error)")
+    }
+}
+
+// MARK: - YMANativeAdDelegate
+extension MoonViewController: YMANativeAdDelegate {
+    func nativeAdDidClick(_ ad: YMANativeAd) {
+        print(#function)
+    }
+
+    func nativeAdWillLeaveApplication(_ ad: YMANativeAd) {
+        print(#function)
+    }
+
+    func nativeAd(_ ad: YMANativeAd, willPresentScreen viewController: UIViewController?) {
+        print(#function)
+    }
+
+    func nativeAd(_ ad: YMANativeAd, didTrackImpressionWith impressionData: YMAImpressionData?) {
+        print(#function)
+    }
+
+    func nativeAd(_ ad: YMANativeAd, didDismissScreen viewController: UIViewController?) {
+        print(#function)
+    }
+
+    func close(_ ad: YMANativeAd) {
+        print(#function)
+    }
 }
