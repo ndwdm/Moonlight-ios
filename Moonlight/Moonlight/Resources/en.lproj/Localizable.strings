@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Moonlight
+
+  Created by Gennady Dmitrik on 20.08.23.
+  
+*/
+
+"General.moonDay" = "Moon Day";
+"General.tap" = "Switch to AR mode";
+"General.swipe" = "Change the date";
+"General.pinch" = "Zoom";

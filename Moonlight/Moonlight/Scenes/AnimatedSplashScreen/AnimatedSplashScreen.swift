@@ -22,9 +22,6 @@ struct AnimatedSplashScreen<Content: View>: View {
     @State var animateContent = false
     @Namespace var animation
 
-    // MARK: Controls and callbacks
-    @State var disableControls = true
-
     init(
         animationTiming: Double = 0.65,
         @ViewBuilder content: @escaping () -> Content,
@@ -50,15 +47,17 @@ struct AnimatedSplashScreen<Content: View>: View {
                                 .aspectRatio(contentMode: .fill)
                                 .matchedGeometryEffect(id: "SplashIcon", in: animation)
                                 .padding(.top, topOffset)
+                                .padding(.leading, animateContent ? 0 : -size.height / 2)
                                 .onChange(of: viewModel.currentMoonPhaseValue) { _ in }
-
                         }
                         .ignoresSafeArea(.container, edges: .all)
-                        content
-                            .offset(y: animateContent ? 0 : size.height)
-                            .disabled(disableControls)
                     }
-                    .frame(maxHeight: .infinity, alignment: .top )
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    ZStack {
+                            content
+                            .padding(.bottom, animateContent ? size.height : proxy.size.height / 2)
+                    }
+                    .offset(y: proxy.size.height / 2 - 40)
                 }
                 .transition(.identity)
                 .ignoresSafeArea(.container, edges: .all)
@@ -78,7 +77,6 @@ struct AnimatedSplashScreen<Content: View>: View {
                 .ignoresSafeArea(.container, edges: .all)
             }
         }
-        .statusBar(hidden: true)
         .onAppear {
             if !startAnimation {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
@@ -87,7 +85,6 @@ struct AnimatedSplashScreen<Content: View>: View {
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + animationTiming - 0.05) {
-                    disableControls = false
                     onAnimationEnd()
                 }
             }

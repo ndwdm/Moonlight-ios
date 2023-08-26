@@ -13,7 +13,6 @@ struct MainContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @AppStorage("launchAppCount") private var launchAppCount = 0
 
-    @State private var statusBarIsHidden = true
     @ObservedObject private var viewModel = MoonlightViewModel()
 
     var body: some View {
@@ -26,28 +25,59 @@ struct MainContentView: View {
                     viewModel.moveOn(-1)
                 }
             }
-        AnimatedSplashScreen(animationTiming: 3) {
-            ScrollView {
-                VStack(spacing: 15) {
-                    Text("Tap on the Moon to enable AR mode")
+        AnimatedSplashScreen(animationTiming: 2) {
+            VStack(
+                alignment: .center,
+                spacing: 0
+            ) {
+                Text(viewModel.selectedDate, style: .date)
+                    .font(.title)
+                Text("\(NSLocalizedString("General.moonDay", comment: "")): \(Int(viewModel.currentMoonPhaseValue.rounded(.up))) " + Int(viewModel.currentMoonPhaseValue.rounded(.up)).symbolForMoon)
+                    .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
+                HStack {
+                    Image("tap")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .aspectRatio(contentMode: .fit)
+                    Text(NSLocalizedString("General.tap", comment: ""))
                         .font(.subheadline)
-                    Text(viewModel.selectedDate, style: .date)
-                        .font(.title)
-                    Text("Moon Day: \(Int(viewModel.currentMoonPhaseValue.rounded(.up))) " + Int(viewModel.currentMoonPhaseValue.rounded(.up)).symbolForMoon)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.center)
+                }
+
+                HStack {
+                    Spacer()
+                    Image("swipe")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                    Text(NSLocalizedString("General.swipe", comment: ""))
                         .font(.subheadline)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.center)
+
+                    Image("pinch")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .aspectRatio(contentMode: .fit)
+                    Text(NSLocalizedString("General.pinch", comment: ""))
+                        .font(.subheadline)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.center)
+                    Spacer()
                 }
             }
-        } onAnimationEnd: {
-            statusBarIsHidden = false
-        }
-        .statusBar(hidden: statusBarIsHidden)
+            .padding(0)
+        } onAnimationEnd: {}
         .onChange(of: viewModel.currentMoonPhaseValue) { _ in }
         .environmentObject(viewModel)
         .gesture(dragGesture)
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
                 launchAppCount += 1
-                if launchAppCount % 3 == 0 {
+                if launchAppCount % 2 == 0 {
                     //requestReview()
                     if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
                         DispatchQueue.main.async {

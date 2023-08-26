@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Moonlight
+
+  Created by Gennady Dmitrik on 20.08.23.
+  
+*/
+
+"General.moonDay" = "Лунный день";
+"General.tap" = "Режим дополненной реальности (AR)";
+"General.swipe" = "Выбор даты";
+"General.pinch" = "Масштаб";
