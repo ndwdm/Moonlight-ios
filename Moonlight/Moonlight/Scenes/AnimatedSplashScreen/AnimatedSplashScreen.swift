@@ -22,9 +22,6 @@ struct AnimatedSplashScreen<Content: View>: View {
     @State var animateContent = false
     @Namespace var animation
 
-    // MARK: Controls and callbacks
-    @State var disableControls = true
-
     init(
         animationTiming: Double = 0.65,
         @ViewBuilder content: @escaping () -> Content,
@@ -50,13 +47,14 @@ struct AnimatedSplashScreen<Content: View>: View {
                                 .aspectRatio(contentMode: .fill)
                                 .matchedGeometryEffect(id: "SplashIcon", in: animation)
                                 .padding(.top, topOffset)
+                                .padding(.leading, animateContent ? 0 : -size.height / 2)
                                 .onChange(of: viewModel.currentMoonPhaseValue) { _ in }
-
                         }
                         .ignoresSafeArea(.container, edges: .all)
-                        content
-                            .offset(y: animateContent ? 0 : size.height)
-                            .disabled(disableControls)
+                        ZStack(alignment: .bottom) {
+                            content
+                                .padding(.bottom, animateContent ? size.height: 50)
+                        }
                     }
                     .frame(maxHeight: .infinity, alignment: .top )
                 }
@@ -78,7 +76,6 @@ struct AnimatedSplashScreen<Content: View>: View {
                 .ignoresSafeArea(.container, edges: .all)
             }
         }
-        .statusBar(hidden: true)
         .onAppear {
             if !startAnimation {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
@@ -87,7 +84,6 @@ struct AnimatedSplashScreen<Content: View>: View {
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + animationTiming - 0.05) {
-                    disableControls = false
                     onAnimationEnd()
                 }
             }
