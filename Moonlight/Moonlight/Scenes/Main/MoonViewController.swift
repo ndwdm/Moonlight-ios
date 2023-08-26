@@ -12,21 +12,26 @@ import Combine
 import SceneKit
 import ARKit
 
+enum MoonMode {
+    case main
+    case ar
+}
+
 final class MoonViewController: UIViewController {
     fileprivate var viewModel: MoonlightViewModel?
-    private let playerLayer = AVPlayerLayer()
-    private var player = AVPlayer()
-    private let length = 24.0
-    private var isInitialLoading = true
-    private var speed = 0.0
-    private let stepOffset = 0.8127165763
-    private var previousPosition = 0.0
 
     private var arMode = false
     private let configuration = ARWorldTrackingConfiguration()
-    private var moonARSceneView = ARSCNView()
+
+    private var mainMoonSceneView = SCNView()
     private let moonNode = SCNNode()
-    private let directLightNode = SCNNode()
+
+    private var arMoonSceneView = ARSCNView()
+    private let moonARNode = SCNNode()
+
+    private let lightPosition = SCNVector3(x: 0, y: 0, z: -3)
+    private var directLightNode = SCNNode()
+    private var directARLightNode = SCNNode()
 
     init(viewModel: MoonlightViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -40,93 +45,83 @@ final class MoonViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fileUrl = Bundle.main.url(forResource: "moonVideo", withExtension: "mov")!
-        player = AVPlayer(url: fileUrl)
-        player.actionAtItemEnd = .none
-        playerLayer.player = player
-        playerLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(playerLayer)
-        setupAR()
+        setupViews()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        playerLayer.frame = view.bounds
-        moonARSceneView.session.run(configuration)
+        arMoonSceneView.session.run(configuration)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        moonARSceneView.session.pause()
+        arMoonSceneView.session.pause()
     }
 
     func updateCurrentMoonPhase() {
-        speed = isInitialLoading && (viewModel?.currentMoonPhaseValue ?? 0.0) > 6.5 ? 5.0 : 1.0
-        if isInitialLoading {
-            previousPosition = getStartPosition()
-        }
-        var start = previousPosition
-        let end = getEndPosition()
-        var rate = end > start ? speed : -speed
-        if previousPosition > 23 && (viewModel?.currentMoonPhaseValue ?? 0.0) < 1 {
-            start = 0.0
-            rate = abs(rate)
-        } else if (!isInitialLoading) && previousPosition < 0.8 && (viewModel?.currentMoonPhaseValue ?? 0.0) > 28.5 {
-            start = length
-        }
-        previousPosition = end
-        let timeToPause = abs((end - start) / rate)
-        player.seek(to: CMTime(seconds: start, preferredTimescale: 600))
-        player.play()
-        player.rate = Float(rate)
-        if isInitialLoading {
-            isInitialLoading.toggle()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeToPause) {
-            self.player.pause()
-        }
-
-        directLightNode.eulerAngles = SCNVector3(
-            0,
-            -Float((viewModel?.currentMoonPhaseValue ?? 0) - 14.5) * 0.21,
-            0
-        )
+        animatePhaseLightChange(with: viewModel?.currentMoonPhaseValue ?? 0)
     }
 }
 
 private extension MoonViewController {
-    func getStartPosition() -> Double {
-        if (viewModel?.currentMoonPhaseValue ?? 0.0) < 2 {
-            return 4
-        }
-        return 0
+    func setupViews() {
+        setupScene()
+        setupAR()
+        enableMoonZoom()
     }
 
-    func getEndPosition() -> Double {
-        (viewModel?.currentMoonPhaseValue ?? 0.0) * stepOffset
+    func setupScene() {
+        let moonModeSelectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(moonModeSelect))
+        view.addGestureRecognizer(moonModeSelectGestureRecognizer)
+
+        setupMoon(for: moonNode, with: 1.3)
+        shadowingMoon(for: moonNode, mode: .main)
+
+        mainMoonSceneView = SCNView(frame: .init(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 2))
+        view.addSubview(mainMoonSceneView)
+        mainMoonSceneView.layer.zPosition = 5
+
+        let scene = SCNScene()
+        mainMoonSceneView.scene = scene
+        mainMoonSceneView.backgroundColor = .black
+
+        let camera = SCNCamera()
+        let cameraNode = SCNNode()
+        cameraNode.camera = camera
+        cameraNode.position = SCNVector3(x: 0.0, y: 0.0, z: 0.3)
+
+        let constraint = SCNLookAtConstraint(target: moonNode)
+        constraint.isGimbalLockEnabled = true
+        cameraNode.constraints = [constraint]
+
+        scene.rootNode.addChildNode(cameraNode)
+        scene.rootNode.addChildNode(moonNode)
+
+        animatePlaneKey(nodeToAnimate: moonNode)
     }
 
     func setupAR() {
-        let moonARSelectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(moonARSelect))
-        view.addGestureRecognizer(moonARSelectGestureRecognizer)
-        view.addSubview(moonARSceneView)
-        moonARSceneView.layer.zPosition = 2
-        moonARSceneView.frame = view.bounds
-        moonARSceneView.alpha = 0
-        moonARSceneView.delegate = self
-        let sphere = SCNSphere(radius: 0.8)
+        setupMoon(for: moonARNode, with: 0.8)
+        shadowingMoon(for: moonARNode, mode: .ar)
+        view.addSubview(arMoonSceneView)
+        arMoonSceneView.layer.zPosition = 4
+        arMoonSceneView.frame = view.bounds
+        arMoonSceneView.alpha = 0
+        arMoonSceneView.delegate = self
+        arMoonSceneView.scene.rootNode.addChildNode(moonARNode)
+        arMoonSceneView.autoenablesDefaultLighting = true
+    }
+
+    func setupMoon(for node: SCNNode, with radius: Double) {
+        let sphere = SCNSphere(radius: radius)
         let material = SCNMaterial()
         material.diffuse.contents = UIImage(named: "moonAR.scnassets/8k_moon.jpg")
         sphere.materials = [material]
-        moonNode.position = SCNVector3(x: 0, y: 0, z: -3)
-        moonNode.geometry = sphere
-        moonARSceneView.scene.rootNode.addChildNode(moonNode)
-        moonARSceneView.autoenablesDefaultLighting = true
-        shadowingMoonAR()
-        enableMoonARZoom()
+        node.position = SCNVector3(x: 0, y: 0, z: -3)
+        node.geometry = sphere
     }
 
-    func shadowingMoonAR() {
+    func shadowingMoon(for node: SCNNode, mode: MoonMode) {
         let ambientLightPosition = SCNVector3(x: 0, y: 0, z: 0)
         // Create an ambient light
         let ambientLightNode = SCNNode()
@@ -135,44 +130,85 @@ private extension MoonViewController {
         ambientLightNode.light?.color = UIColor.white
         ambientLightNode.light?.type = SCNLight.LightType.ambient
         ambientLightNode.position = ambientLightPosition
-        moonNode.addChildNode(ambientLightNode)
+        node.addChildNode(ambientLightNode)
 
-        let lightPosition = SCNVector3(x: 0, y: 0, z: -3)
         // Create a directional light node with shadow
-        directLightNode.light = SCNLight()
-        directLightNode.light?.type = SCNLight.LightType.directional
-        directLightNode.light?.color = UIColor.white
-        directLightNode.light?.castsShadow = true
-        directLightNode.light?.automaticallyAdjustsShadowProjection = true
-        directLightNode.light?.shadowSampleCount = 64
-        directLightNode.light?.shadowRadius = 16
-        directLightNode.light?.shadowMode = .deferred
-        directLightNode.light?.shadowMapSize = CGSize(width: 2048, height: 2048)
-        directLightNode.light?.shadowColor = UIColor.black.withAlphaComponent(0.9)
-        directLightNode.position = lightPosition
+        setupDirectLight(for: &directLightNode)
+        setupDirectLight(for: &directARLightNode)
 
         // Add the lights to the container
-        moonNode.addChildNode(directLightNode)
+        node.addChildNode(mode == .main ? directLightNode : directARLightNode)
     }
 
-    func enableMoonARZoom() {
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(startZooming(_:)))
-        moonARSceneView.addGestureRecognizer(pinchGesture)
-      }
+    func setupDirectLight(for node: inout SCNNode) {
+        // Create a directional light node with shadow
+        node.light = SCNLight()
+        node.light?.type = SCNLight.LightType.directional
+        node.light?.color = UIColor.white
+        node.light?.castsShadow = true
+        node.light?.automaticallyAdjustsShadowProjection = true
+        node.light?.shadowSampleCount = 64
+        node.light?.shadowRadius = 16
+        node.light?.shadowMode = .deferred
+        node.light?.shadowMapSize = CGSize(width: 2048, height: 2048)
+        node.light?.shadowColor = UIColor.black.withAlphaComponent(0.9)
+        node.position = lightPosition
+    }
 
-      @objc func startZooming(_ sender: UIPinchGestureRecognizer) {
-          guard
+    func enableMoonZoom() {
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(startZooming(_:)))
+        mainMoonSceneView.addGestureRecognizer(pinchGesture)
+        let pinchARGesture = UIPinchGestureRecognizer(target: self, action: #selector(startARZooming(_:)))
+        arMoonSceneView.addGestureRecognizer(pinchARGesture)
+    }
+
+    @objc func startZooming(_ sender: UIPinchGestureRecognizer) {
+        guard
             let sphere = moonNode.geometry as? SCNSphere,
             sender.scale > 0 && sender.scale < 2
-          else { return }
-          sphere.radius = sender.scale
-      }
+        else { return }
+        sphere.radius = sender.scale
+    }
 
-    @objc func moonARSelect() {
+    @objc func startARZooming(_ sender: UIPinchGestureRecognizer) {
+        guard
+            let sphere = moonARNode.geometry as? SCNSphere,
+            sender.scale > 0 && sender.scale < 2
+        else { return }
+        sphere.radius = sender.scale
+    }
+
+    @objc func moonModeSelect() {
         arMode.toggle()
         UIView.animate(withDuration: 0.5, delay: 0.0, options: UIView.AnimationOptions(), animations: {
-            self.moonARSceneView.alpha = self.arMode ? 1.0 : 0.0
-        }, completion: { _ in })
+            self.mainMoonSceneView.alpha = self.arMode ? 0.0 : 1.0
+            self.arMoonSceneView.alpha = self.arMode ? 1.0 : 0.0
+        }, completion: { _ in
+            self.mainMoonSceneView.isHidden = self.arMode
+        })
+    }
+
+    func animatePlaneKey(nodeToAnimate: SCNNode) {
+        let animation2 = CAKeyframeAnimation(keyPath: "rotation")
+        let pos1rot = SCNVector4(0, 0, 0, 0)
+        let pos2rot = SCNVector4(0, 1, 0, CGFloat(Float.pi / 2))
+        animation2.values = [pos1rot, pos2rot]
+        animation2.keyTimes = [0, 1]
+        animation2.duration = 200
+        animation2.repeatCount = .infinity
+        animation2.isAdditive = true
+
+        nodeToAnimate.addAnimation(animation2, forKey: "spin around")
+    }
+
+    func animatePhaseLightChange(with angle: Double) {
+        let newVector = SCNVector3(
+            0,
+            -Float(angle - 14.5) * 0.21,
+            0
+        )
+        directLightNode.eulerAngles = newVector
+        directARLightNode.eulerAngles = newVector
     }
 }
 
