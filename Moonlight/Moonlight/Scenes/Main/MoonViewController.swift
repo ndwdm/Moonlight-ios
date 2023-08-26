@@ -21,10 +21,10 @@ enum MoonMode {
 
 final class MoonViewController: UIViewController {
     fileprivate var viewModel: MoonlightViewModel?
-    let adBannerID = "ca-app-pub-7596340865562529/5693808324"
+    let adBannerID = "ID"
     let testADBannerID = "ca-app-pub-3940256099942544/2934735716" // special google test id for banners
-    let yandexAppID = "2753133"
-    let yandexADBannerID = "R-M-2753133-1"
+    let yandexAppID = "ID"
+    let yandexADBannerID = "ID"
 
     private var bannerView: GADBannerView!
     private let yandexADView: YMANativeBannerView = {
