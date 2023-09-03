@@ -21,20 +21,17 @@ enum MoonMode {
 
 final class MoonViewController: UIViewController {
     fileprivate var viewModel: MoonlightViewModel?
-    let adBannerID = "ID"
-    let testADBannerID = "ca-app-pub-3940256099942544/2934735716" // special google test id for banners
-    let yandexAppID = "ID"
+    let googleADBannerID = "ID"
+    let testGoogleADBannerID = "ca-app-pub-3940256099942544/2934735716" // special google test id for banners
     let yandexADBannerID = "ID"
 
-    private var bannerView: GADBannerView!
-    private let yandexADView: YMANativeBannerView = {
-        let adView = YMANativeBannerView()
+    private var googleADBannerView: GADBannerView!
+    private lazy var yandexADView: YMAAdView = {
+        let width = view.safeAreaLayoutGuide.layoutFrame.width
+        let adSize = YMABannerAdSize.stickySize(withContainerWidth: width)
+        let adView = YMAAdView(adUnitID: yandexADBannerID, adSize: adSize)
+        adView.delegate = self
         return adView
-    }()
-    private lazy var adLoader: YMANativeAdLoader = {
-        let adLoader = YMANativeAdLoader()
-        adLoader.delegate = self
-        return adLoader
     }()
 
     private var arMode = false
@@ -87,7 +84,7 @@ private extension MoonViewController {
         enableMoonZoom()
 
         setupGoogleBannerAd()
-        setupYandexNativeBannerAd()
+        yandexADView.loadAd()
     }
 
     func setupScene() {
@@ -147,8 +144,9 @@ private extension MoonViewController {
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
         ambientLightNode.light?.shadowMode = .deferred
-        ambientLightNode.light?.color = UIColor.white
+        ambientLightNode.light?.color = UIColor.white.withAlphaComponent(0.3)
         ambientLightNode.light?.type = SCNLight.LightType.ambient
+        ambientLightNode.light?.intensity = 400
         ambientLightNode.position = ambientLightPosition
         node.addChildNode(ambientLightNode)
 
@@ -214,9 +212,8 @@ private extension MoonViewController {
         let pos2rot = SCNVector4(0, 1, 0, CGFloat(Float.pi / 2))
         animation2.values = [pos1rot, pos2rot]
         animation2.keyTimes = [0, 1]
-        animation2.duration = 200
+        animation2.duration = 500
         animation2.repeatCount = .infinity
-        animation2.isAdditive = true
 
         nodeToAnimate.addAnimation(animation2, forKey: "spin around")
     }
@@ -231,35 +228,26 @@ private extension MoonViewController {
         directARLightNode.eulerAngles = newVector
     }
 
-    func addBannerViewToView(_ bannerView: GADBannerView) {
-        view.addSubview(bannerView)
-        bannerView.layer.zPosition = 10
-        bannerView.frame.origin.y = view.frame.height - 220
-        bannerView.center.x = view.center.x
-       }
-
     func setupGoogleBannerAd() {
-        bannerView = GADBannerView(adSize: GADAdSizeBanner)
-        addBannerViewToView(bannerView)
-        bannerView.adUnitID = adBannerID // testADBannerID
-        bannerView.rootViewController = self
-        bannerView.delegate = self
-        bannerView.load(GADRequest())
+        googleADBannerView = GADBannerView(adSize: GADAdSizeBanner)
+        view.addSubview(googleADBannerView)
+        googleADBannerView.layer.zPosition = 11
+        googleADBannerView.frame.origin.y = view.frame.height - 160
+        googleADBannerView.center.x = view.center.x
+
+        googleADBannerView.adUnitID = googleADBannerID
+        googleADBannerView.rootViewController = self
+        googleADBannerView.delegate = self
+        googleADBannerView.load(GADRequest())
     }
 
-    func setupYandexNativeBannerAd() {
-        let requestConfiguration = YMANativeAdRequestConfiguration(adUnitID: yandexADBannerID)
-        adLoader.loadAd(with: requestConfiguration)
-
+    func setupYandexBannerAD() {
         view.addSubview(yandexADView)
-        yandexADView.frame.size.width = view.frame.size.width
-        yandexADView.frame.origin.y = view.frame.height - 160
-        yandexADView.center.x = view.center.x
-    }
-
-    func bindNativeAd(_ ad: YMANativeAd) {
-        ad.delegate = self
-        yandexADView.ad = ad
+        yandexADView.layer.zPosition = 12
+        
+        if let topVC = UIApplication.getTopViewController() {
+            yandexADView.displayAtBottom(in: topVC.view)
+        }
     }
 }
 
@@ -293,41 +281,33 @@ extension MoonViewController: GADBannerViewDelegate {
     func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {}
 }
 
-// MARK: - YMANativeAdLoaderDelegate
-extension MoonViewController: YMANativeAdLoaderDelegate {
-    func nativeAdLoader(_ loader: YMANativeAdLoader, didLoad ad: YMANativeAd) {
+extension MoonViewController: YMAAdViewDelegate {
+    func adViewDidLoad(_ adView: YMAAdView) {
         print(#function)
-        bindNativeAd(ad)
+        setupYandexBannerAD()
     }
 
-    func nativeAdLoader(_ loader: YMANativeAdLoader, didFailLoadingWithError error: Error) {
+    func adViewDidClick(_ adView: YMAAdView) {
+        print(#function)
+    }
+
+    func adView(_ adView: YMAAdView, didTrackImpressionWith impressionData: YMAImpressionData?) {
+        print(#function)
+    }
+
+    func adViewDidFailLoading(_ adView: YMAAdView, error: Error) {
         print(#function + "Error: \(error)")
     }
-}
 
-// MARK: - YMANativeAdDelegate
-extension MoonViewController: YMANativeAdDelegate {
-    func nativeAdDidClick(_ ad: YMANativeAd) {
+    func adViewWillLeaveApplication(_ adView: YMAAdView) {
         print(#function)
     }
 
-    func nativeAdWillLeaveApplication(_ ad: YMANativeAd) {
+    func adView(_ adView: YMAAdView, willPresentScreen viewController: UIViewController?) {
         print(#function)
     }
 
-    func nativeAd(_ ad: YMANativeAd, willPresentScreen viewController: UIViewController?) {
-        print(#function)
-    }
-
-    func nativeAd(_ ad: YMANativeAd, didTrackImpressionWith impressionData: YMAImpressionData?) {
-        print(#function)
-    }
-
-    func nativeAd(_ ad: YMANativeAd, didDismissScreen viewController: UIViewController?) {
-        print(#function)
-    }
-
-    func close(_ ad: YMANativeAd) {
+    func adView(_ adView: YMAAdView, didDismissScreen viewController: UIViewController?) {
         print(#function)
     }
 }

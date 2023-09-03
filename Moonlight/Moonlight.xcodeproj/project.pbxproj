@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3538BDE82A920AAB0009B458 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3538BDEA2A920AAB0009B458 /* Localizable.strings */; };
+		3544A4482AA3B78B00B7CF2E /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544A4472AA3B78B00B7CF2E /* UIApplication+Extensions.swift */; };
 		35B7581229AA409400C94902 /* moonAR.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B7581129AA409300C94902 /* moonAR.scnassets */; };
 		35B7581429AA41FE00C94902 /* MoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7581329AA41FE00C94902 /* MoonViewController.swift */; };
 		35C2F2802976CA7B0015860F /* MoonlightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2F27F2976CA7B0015860F /* MoonlightApp.swift */; };
@@ -29,9 +30,8 @@
 		35C67C722A9A1C0000C83E96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35C67C712A9A1C0000C83E96 /* GoogleService-Info.plist */; };
 		35C67C752A9A20D000C83E96 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C742A9A20D000C83E96 /* FirebaseAnalytics */; };
 		35C67C772A9A20D000C83E96 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C762A9A20D000C83E96 /* FirebaseCrashlytics */; };
-		35C67C7A2A9A258D00C83E96 /* YandexMobileAdsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C792A9A258D00C83E96 /* YandexMobileAdsPackage */; };
-		35C67C7C2A9A279800C83E96 /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35C67C7B2A9A279800C83E96 /* YandexMobileAdsBundle.bundle */; };
 		35C67C7F2A9A291F00C83E96 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C7E2A9A291F00C83E96 /* GoogleMobileAds */; };
+		D8568AD6118421339012C4C4 /* Pods_Moonlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1E83DA75ECE2FB9B9A1702 /* Pods_Moonlight.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +54,10 @@
 /* Begin PBXFileReference section */
 		3538BDE92A920AAB0009B458 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3538BDEB2A920AB00009B458 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3544A43D2AA39FEA00B7CF2E /* YandexMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = YandexMobileAds.xcframework; path = Pods/YandexMobileAds/static/YandexMobileAds.xcframework; sourceTree = "<group>"; };
+		3544A43E2AA39FEA00B7CF2E /* YandexMobileAdsAdMobAdapters.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = YandexMobileAdsAdMobAdapters.xcframework; path = Pods/YandexMobileAdsAdMobAdapters/YandexMobileAdsAdMobAdapters.xcframework; sourceTree = "<group>"; };
+		3544A43F2AA39FEA00B7CF2E /* YandexMobileAdsIronSourceAdapters.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = YandexMobileAdsIronSourceAdapters.xcframework; path = Pods/YandexMobileAdsIronSourceAdapters/YandexMobileAdsIronSourceAdapters.xcframework; sourceTree = "<group>"; };
+		3544A4472AA3B78B00B7CF2E /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		35B7581129AA409300C94902 /* moonAR.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = moonAR.scnassets; sourceTree = "<group>"; };
 		35B7581329AA41FE00C94902 /* MoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonViewController.swift; sourceTree = "<group>"; };
 		35C2F27C2976CA7B0015860F /* Moonlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moonlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +81,9 @@
 		35C2F2E2297935030015860F /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		35C2F2E42979AFAC0015860F /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		35C67C712A9A1C0000C83E96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		35C67C7B2A9A279800C83E96 /* YandexMobileAdsBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YandexMobileAdsBundle.bundle; sourceTree = "<group>"; };
+		507817B3CBA572016E9F2D70 /* Pods-Moonlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonlight.release.xcconfig"; path = "Target Support Files/Pods-Moonlight/Pods-Moonlight.release.xcconfig"; sourceTree = "<group>"; };
+		DA1E83DA75ECE2FB9B9A1702 /* Pods_Moonlight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moonlight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5D95F52336378FD2872CA83 /* Pods-Moonlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonlight.debug.xcconfig"; path = "Target Support Files/Pods-Moonlight/Pods-Moonlight.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +94,7 @@
 				35C67C7F2A9A291F00C83E96 /* GoogleMobileAds in Frameworks */,
 				35C67C752A9A20D000C83E96 /* FirebaseAnalytics in Frameworks */,
 				35C67C772A9A20D000C83E96 /* FirebaseCrashlytics in Frameworks */,
-				35C67C7A2A9A258D00C83E96 /* YandexMobileAdsPackage in Frameworks */,
+				D8568AD6118421339012C4C4 /* Pods_Moonlight.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,11 +118,12 @@
 		35C2F2732976CA7B0015860F = {
 			isa = PBXGroup;
 			children = (
-				35C67C7B2A9A279800C83E96 /* YandexMobileAdsBundle.bundle */,
 				35C2F27E2976CA7B0015860F /* Moonlight */,
 				35C2F28F2976CA7F0015860F /* MoonlightTests */,
 				35C2F2992976CA7F0015860F /* MoonlightUITests */,
 				35C2F27D2976CA7B0015860F /* Products */,
+				9A0B7B438225AF039CA95078 /* Pods */,
+				463EDE09F6B14D241A09EDCE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +193,7 @@
 				35C2F2B52976DA330015860F /* View+Extensions.swift */,
 				35C2F2E2297935030015860F /* Date+Extensions.swift */,
 				35C2F2E42979AFAC0015860F /* Int+Extensions.swift */,
+				3544A4472AA3B78B00B7CF2E /* UIApplication+Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -228,6 +236,26 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		463EDE09F6B14D241A09EDCE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3544A43D2AA39FEA00B7CF2E /* YandexMobileAds.xcframework */,
+				3544A43E2AA39FEA00B7CF2E /* YandexMobileAdsAdMobAdapters.xcframework */,
+				3544A43F2AA39FEA00B7CF2E /* YandexMobileAdsIronSourceAdapters.xcframework */,
+				DA1E83DA75ECE2FB9B9A1702 /* Pods_Moonlight.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9A0B7B438225AF039CA95078 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F5D95F52336378FD2872CA83 /* Pods-Moonlight.debug.xcconfig */,
+				507817B3CBA572016E9F2D70 /* Pods-Moonlight.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -235,9 +263,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35C2F2A02976CA7F0015860F /* Build configuration list for PBXNativeTarget "Moonlight" */;
 			buildPhases = (
+				C20A0867A2650A6CBF69F5E7 /* [CP] Check Pods Manifest.lock */,
 				35C2F2782976CA7B0015860F /* Sources */,
 				35C2F2792976CA7B0015860F /* Frameworks */,
 				35C2F27A2976CA7B0015860F /* Resources */,
+				FDBB3499859EF69F5F5CBE5A /* [CP] Embed Pods Frameworks */,
+				00C9CCFC3302986D7081D01D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -247,7 +278,6 @@
 			packageProductDependencies = (
 				35C67C742A9A20D000C83E96 /* FirebaseAnalytics */,
 				35C67C762A9A20D000C83E96 /* FirebaseCrashlytics */,
-				35C67C792A9A258D00C83E96 /* YandexMobileAdsPackage */,
 				35C67C7E2A9A291F00C83E96 /* GoogleMobileAds */,
 			);
 			productName = Moonlight;
@@ -344,7 +374,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35C67C7C2A9A279800C83E96 /* YandexMobileAdsBundle.bundle in Resources */,
 				3538BDE82A920AAB0009B458 /* Localizable.strings in Resources */,
 				35C2F2872976CA7F0015860F /* Preview Assets.xcassets in Resources */,
 				35B7581229AA409400C94902 /* moonAR.scnassets in Resources */,
@@ -372,11 +401,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		00C9CCFC3302986D7081D01D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Moonlight/Pods-Moonlight-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Moonlight/Pods-Moonlight-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Moonlight/Pods-Moonlight-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C20A0867A2650A6CBF69F5E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Moonlight-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDBB3499859EF69F5F5CBE5A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Moonlight/Pods-Moonlight-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Moonlight/Pods-Moonlight-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Moonlight/Pods-Moonlight-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		35C2F2782976CA7B0015860F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3544A4482AA3B78B00B7CF2E /* UIApplication+Extensions.swift in Sources */,
 				35B7581429AA41FE00C94902 /* MoonViewController.swift in Sources */,
 				35C2F2E52979AFAC0015860F /* Int+Extensions.swift in Sources */,
 				35C2F2AF2976CC690015860F /* MoonlightViewModel.swift in Sources */,
@@ -552,11 +641,12 @@
 		};
 		35C2F2A12976CA7F0015860F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5D95F52336378FD2872CA83 /* Pods-Moonlight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Moonlight/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N3M37Y7LY;
 				ENABLE_PREVIEWS = YES;
@@ -575,7 +665,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -589,11 +679,12 @@
 		};
 		35C2F2A22976CA7F0015860F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 507817B3CBA572016E9F2D70 /* Pods-Moonlight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Moonlight/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N3M37Y7LY;
 				ENABLE_PREVIEWS = YES;
@@ -612,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -778,11 +869,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 35C67C732A9A20D000C83E96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
-		};
-		35C67C792A9A258D00C83E96 /* YandexMobileAdsPackage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 35C67C782A9A258D00C83E96 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */;
-			productName = YandexMobileAdsPackage;
 		};
 		35C67C7E2A9A291F00C83E96 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
