@@ -3,11 +3,6 @@ platform :ios, '14.0'
 use_frameworks!
 
 target 'Moonlight' do
-    pod 'SnapKit', '~> 5.6.0'
-    pod 'YandexMobileAdsAdMobAdapters'
-    pod 'YandexMobileAdsIronSourceAdapters'
-    #pod 'YandexMobileAdsMediation'
-    pod 'YandexMobileAdsInstream'
 end
 
 post_install do |installer|
