@@ -22,10 +22,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct MoonlightApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
             MainContentView()
+                .onChange(of: scenePhase) { newPhase in
+                    if newPhase == .active {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            AppOpenAdManager.shared.showAdIfAvailable()
+                        }
+                    }
+                }
         }
     }
 }

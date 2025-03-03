@@ -13,7 +13,6 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
     var isLoadingAd = false
     var isShowingAd = false
     var loadTime: Date?
-    let fourHoursInSeconds = TimeInterval(3600 * 4)
 
     static let shared = AppOpenAdManager()
 
@@ -22,6 +21,7 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
         if isLoadingAd || isAdAvailable() {
             return
         }
+        print(">>: Load AD")
         isLoadingAd = true
 
         do {
@@ -43,6 +43,11 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
         if !isAdAvailable() {
             Task {
                 await loadAd()
+
+                if let ad = appOpenAd {
+                    isShowingAd = true
+                    ad.present(from: nil)
+                }
             }
             return
         }
@@ -58,12 +63,6 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
         return appOpenAd != nil
     }
 
-    private func wasLoadTimeLessThanFourHoursAgo() -> Bool {
-        guard let loadTime = loadTime else { return false }
-        // Check if ad was loaded more than four hours ago.
-        return Date().timeIntervalSince(loadTime) < fourHoursInSeconds
-      }
-
     // MARK: - GADFullScreenContentDelegate methods
 
     func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
@@ -71,6 +70,7 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
     }
 
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
+        print(">>: AD dismissed")
         appOpenAd = nil
         isShowingAd = false
         // Reload an ad.
@@ -83,6 +83,7 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
         _ ad: FullScreenPresentingAd,
         didFailToPresentFullScreenContentWithError error: Error
     ) {
+        print(">>: AD failed")
         appOpenAd = nil
         isShowingAd = false
         // Reload an ad.
