@@ -9,7 +9,6 @@ import SwiftUI
 import StoreKit
 
 struct MainContentView: View {
-    //@Environment(\.requestReview) private var requestReview
     @Environment(\.scenePhase) var scenePhase
     @AppStorage("launchAppCount") private var launchAppCount = 0
 
@@ -36,6 +35,9 @@ struct MainContentView: View {
                     .font(.subheadline)
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
+                Spacer()
+                GeomagneticForecastView()
+                Spacer()
                 HStack {
                     Image("tap")
                         .resizable()
@@ -78,7 +80,6 @@ struct MainContentView: View {
             if newPhase == .active {
                 launchAppCount += 1
                 if launchAppCount % 2 == 0 {
-                    //requestReview()
                     if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
                         DispatchQueue.main.async {
                             SKStoreReviewController.requestReview(in: scene)

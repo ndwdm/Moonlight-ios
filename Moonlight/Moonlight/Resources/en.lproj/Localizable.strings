@@ -7,6 +7,8 @@
 */
 
 "General.moonDay" = "Moon Day";
+"General.geomagnetic" = "Geomagnetic storm";
+"General.geomagnetic_loading" = "Loading...";
 "General.tap" = "Switch to AR mode";
 "General.swipe" = "Change the date";
 "General.pinch" = "Zoom";

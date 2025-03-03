@@ -12,7 +12,7 @@ import Combine
 import SceneKit
 import ARKit
 import GoogleMobileAds
-import YandexMobileAds
+import SnapKit
 
 enum MoonMode {
     case main
@@ -21,18 +21,9 @@ enum MoonMode {
 
 final class MoonViewController: UIViewController {
     fileprivate var viewModel: MoonlightViewModel?
-    let googleADBannerID = "ID"
-    let testGoogleADBannerID = "ca-app-pub-3940256099942544/2934735716" // special google test id for banners
-    let yandexADBannerID = "ID"
+    let googleADBannerID = ""
 
-    private var googleADBannerView: GADBannerView!
-    private lazy var yandexADView: YMAAdView = {
-        let width = view.safeAreaLayoutGuide.layoutFrame.width
-        let adSize = YMABannerAdSize.stickySize(withContainerWidth: width)
-        let adView = YMAAdView(adUnitID: yandexADBannerID, adSize: adSize)
-        adView.delegate = self
-        return adView
-    }()
+    private var bannerView: BannerView?
 
     private var arMode = false
     private let configuration = ARWorldTrackingConfiguration()
@@ -60,6 +51,13 @@ final class MoonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleSceneWillEnterForeground),
+            name: UIScene.willEnterForegroundNotification,
+            object: nil
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,8 +70,18 @@ final class MoonViewController: UIViewController {
         arMoonSceneView.session.pause()
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func updateCurrentMoonPhase() {
         animatePhaseLightChange(with: viewModel?.currentMoonPhaseValue ?? 0)
+    }
+
+    // MARK: - Actions
+
+    @objc private func handleSceneWillEnterForeground(_ notification: Notification) {
+        AppOpenAdManager.shared.showAdIfAvailable()
     }
 }
 
@@ -84,7 +92,6 @@ private extension MoonViewController {
         enableMoonZoom()
 
         setupGoogleBannerAd()
-        yandexADView.loadAd()
     }
 
     func setupScene() {
@@ -114,7 +121,7 @@ private extension MoonViewController {
         scene.rootNode.addChildNode(cameraNode)
         scene.rootNode.addChildNode(moonNode)
 
-        animatePlaneKey(nodeToAnimate: moonNode)
+//        animatePlaneKey(nodeToAnimate: moonNode)
     }
 
     func setupAR() {
@@ -229,25 +236,20 @@ private extension MoonViewController {
     }
 
     func setupGoogleBannerAd() {
-        googleADBannerView = GADBannerView(adSize: GADAdSizeBanner)
-        view.addSubview(googleADBannerView)
-        googleADBannerView.layer.zPosition = 11
-        googleADBannerView.frame.origin.y = view.frame.height - 160
-        googleADBannerView.center.x = view.center.x
+        let viewWidth = view.frame.inset(by: view.safeAreaInsets).width
+        let adaptiveSize = currentOrientationAnchoredAdaptiveBanner(width: viewWidth)
+        bannerView = BannerView(adSize: adaptiveSize)
+        bannerView?.adUnitID = googleADBannerID
+        bannerView?.rootViewController = self
+        bannerView?.load(Request())
 
-        googleADBannerView.adUnitID = googleADBannerID
-        googleADBannerView.rootViewController = self
-        googleADBannerView.delegate = self
-        googleADBannerView.load(GADRequest())
-    }
+        guard let bannerView else { return }
 
-    func setupYandexBannerAD() {
-        view.addSubview(yandexADView)
-        yandexADView.layer.zPosition = 12
-        
-        if let topVC = UIApplication.getTopViewController() {
-            yandexADView.displayAtBottom(in: topVC.view)
-        }
+        view.addSubview(bannerView)
+
+        bannerView.layer.zPosition = 11
+        bannerView.frame.origin.y = view.frame.height - 100
+        bannerView.center.x = view.center.x
     }
 }
 
@@ -260,54 +262,28 @@ extension MoonViewController: ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {}
 }
 
-extension MoonViewController: GADBannerViewDelegate {
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        bannerView.alpha = 0
-        UIView.animate(withDuration: 1, animations: {
-            bannerView.alpha = 1
-        })
+extension MoonViewController: BannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+        print(">>: bannerViewDidReceiveAd")
     }
 
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
+        print(">>: bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
     }
 
-    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {}
-
-    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {}
-
-    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {}
-
-    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {}
-}
-
-extension MoonViewController: YMAAdViewDelegate {
-    func adViewDidLoad(_ adView: YMAAdView) {
-        print(#function)
-        setupYandexBannerAD()
+    func bannerViewDidRecordImpression(_ bannerView: BannerView) {
+        print(">>: bannerViewDidRecordImpression")
     }
 
-    func adViewDidClick(_ adView: YMAAdView) {
-        print(#function)
+    func bannerViewWillPresentScreen(_ bannerView: BannerView) {
+        print(">>: bannerViewWillPresentScreen")
     }
 
-    func adView(_ adView: YMAAdView, didTrackImpressionWith impressionData: YMAImpressionData?) {
-        print(#function)
+    func bannerViewWillDismissScreen(_ bannerView: BannerView) {
+        print(">>: bannerViewWillDIsmissScreen")
     }
 
-    func adViewDidFailLoading(_ adView: YMAAdView, error: Error) {
-        print(#function + "Error: \(error)")
-    }
-
-    func adViewWillLeaveApplication(_ adView: YMAAdView) {
-        print(#function)
-    }
-
-    func adView(_ adView: YMAAdView, willPresentScreen viewController: UIViewController?) {
-        print(#function)
-    }
-
-    func adView(_ adView: YMAAdView, didDismissScreen viewController: UIViewController?) {
-        print(#function)
+    func bannerViewDidDismissScreen(_ bannerView: BannerView) {
+        print(">>: bannerViewDidDismissScreen")
     }
 }

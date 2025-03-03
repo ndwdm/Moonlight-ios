@@ -7,6 +7,8 @@
 */
 
 "General.moonDay" = "Лунный день";
+"General.geomagnetic" = "Геомагнитные бури";
+"General.geomagnetic_loading" = "Загрузка...";
 "General.tap" = "Режим дополненной реальности (AR)";
 "General.swipe" = "Выбор даты";
 "General.pinch" = "Масштаб";
