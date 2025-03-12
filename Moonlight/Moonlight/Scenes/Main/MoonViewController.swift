@@ -121,7 +121,7 @@ private extension MoonViewController {
         scene.rootNode.addChildNode(cameraNode)
         scene.rootNode.addChildNode(moonNode)
 
-//        animatePlaneKey(nodeToAnimate: moonNode)
+        animatePlaneKey(nodeToAnimate: moonNode)
     }
 
     func setupAR() {
@@ -214,15 +214,15 @@ private extension MoonViewController {
     }
 
     func animatePlaneKey(nodeToAnimate: SCNNode) {
-        let animation2 = CAKeyframeAnimation(keyPath: "rotation")
+//        let animation2 = CAKeyframeAnimation(keyPath: "rotation")
         let pos1rot = SCNVector4(0, 0, 0, 0)
         let pos2rot = SCNVector4(0, 1, 0, CGFloat(Float.pi / 2))
-        animation2.values = [pos1rot, pos2rot]
-        animation2.keyTimes = [0, 1]
-        animation2.duration = 500
-        animation2.repeatCount = .infinity
+//        animation2.values = [pos1rot, pos2rot]
+//        animation2.keyTimes = [0, 1]
+//        animation2.duration = 500
+//        animation2.repeatCount = .infinity
 
-        nodeToAnimate.addAnimation(animation2, forKey: "spin around")
+//        nodeToAnimate.addAnimation(animation2, forKey: "spin around")
     }
 
     func animatePhaseLightChange(with angle: Double) {
