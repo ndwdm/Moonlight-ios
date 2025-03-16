@@ -120,8 +120,6 @@ private extension MoonViewController {
 
         scene.rootNode.addChildNode(cameraNode)
         scene.rootNode.addChildNode(moonNode)
-
-        animatePlaneKey(nodeToAnimate: moonNode)
     }
 
     func setupAR() {
@@ -150,11 +148,9 @@ private extension MoonViewController {
         // Create an ambient light
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
-        ambientLightNode.light?.shadowMode = .deferred
         ambientLightNode.light?.color = UIColor.white.withAlphaComponent(0.3)
         ambientLightNode.light?.type = SCNLight.LightType.ambient
-        ambientLightNode.light?.intensity = 400
-        ambientLightNode.position = ambientLightPosition
+        ambientLightNode.light?.intensity = 25
         node.addChildNode(ambientLightNode)
 
         // Create a directional light node with shadow
@@ -174,9 +170,13 @@ private extension MoonViewController {
         node.light?.automaticallyAdjustsShadowProjection = true
         node.light?.shadowSampleCount = 64
         node.light?.shadowRadius = 16
-        node.light?.shadowMode = .deferred
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.3
+        node.light?.intensity = 2500
+        SCNTransaction.commit()
+
         node.light?.shadowMapSize = CGSize(width: 2048, height: 2048)
-        node.light?.shadowColor = UIColor.black.withAlphaComponent(0.9)
+        node.light?.shadowColor = UIColor.black.withAlphaComponent(0.95)
         node.position = lightPosition
     }
 
@@ -213,26 +213,21 @@ private extension MoonViewController {
         })
     }
 
-    func animatePlaneKey(nodeToAnimate: SCNNode) {
-//        let animation2 = CAKeyframeAnimation(keyPath: "rotation")
-        let pos1rot = SCNVector4(0, 0, 0, 0)
-        let pos2rot = SCNVector4(0, 1, 0, CGFloat(Float.pi / 2))
-//        animation2.values = [pos1rot, pos2rot]
-//        animation2.keyTimes = [0, 1]
-//        animation2.duration = 500
-//        animation2.repeatCount = .infinity
-
-//        nodeToAnimate.addAnimation(animation2, forKey: "spin around")
-    }
-
     func animatePhaseLightChange(with angle: Double) {
         let newVector = SCNVector3(
             0,
             -Float(angle - 14.5) * 0.21,
             0
         )
-        directLightNode.eulerAngles = newVector
-        directARLightNode.eulerAngles = newVector
+
+        let rotateAction = SCNAction.rotateTo(
+            x: CGFloat(newVector.x),
+            y: CGFloat(newVector.y),
+            z: CGFloat(newVector.z),
+            duration: 0
+        )
+        directLightNode.runAction(rotateAction)
+        directARLightNode.runAction(rotateAction)
     }
 
     func setupGoogleBannerAd() {

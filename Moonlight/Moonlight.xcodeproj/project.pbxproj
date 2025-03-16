@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,9 @@
 		3544A4482AA3B78B00B7CF2E /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544A4472AA3B78B00B7CF2E /* UIApplication+Extensions.swift */; };
 		3593B1A52D75BEA7008E2AB4 /* AppOpenAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593B1A42D75BEA7008E2AB4 /* AppOpenAdManager.swift */; };
 		3593B1A82D75C7AF008E2AB4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3593B1A72D75C7AF008E2AB4 /* SnapKit */; };
+		3595C6AF2D8702C00071E5BC /* Moonlight Phase Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3595C6A22D8702BE0071E5BC /* Moonlight Phase Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3595C6B42D8703710071E5BC /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2F2E2297935030015860F /* Date+Extensions.swift */; };
+		3595C6BB2D8706640071E5BC /* GeomagneticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3595C6BA2D8706640071E5BC /* GeomagneticViewModel.swift */; };
 		35B7581229AA409400C94902 /* moonAR.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B7581129AA409300C94902 /* moonAR.scnassets */; };
 		35B7581429AA41FE00C94902 /* MoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7581329AA41FE00C94902 /* MoonViewController.swift */; };
 		35B8D2F22D75D0DD0087B27F /* GeomagneticForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B8D2F12D75D0DD0087B27F /* GeomagneticForecastView.swift */; };
@@ -38,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3595C6AD2D8702C00071E5BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35C2F2742976CA7B0015860F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3595C6A12D8702BE0071E5BC;
+			remoteInfo = "Moonlight Phase Watch Watch App";
+		};
 		35C2F28D2976CA7F0015860F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 35C2F2742976CA7B0015860F /* Project object */;
@@ -54,6 +64,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3595C6B02D8702C00071E5BC /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				3595C6AF2D8702C00071E5BC /* Moonlight Phase Watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3538BDE92A920AAB0009B458 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3538BDEB2A920AB00009B458 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -62,6 +86,8 @@
 		3544A43F2AA39FEA00B7CF2E /* YandexMobileAdsIronSourceAdapters.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = YandexMobileAdsIronSourceAdapters.xcframework; path = Pods/YandexMobileAdsIronSourceAdapters/YandexMobileAdsIronSourceAdapters.xcframework; sourceTree = "<group>"; };
 		3544A4472AA3B78B00B7CF2E /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		3593B1A42D75BEA7008E2AB4 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
+		3595C6A22D8702BE0071E5BC /* Moonlight Phase Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Moonlight Phase Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3595C6BA2D8706640071E5BC /* GeomagneticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeomagneticViewModel.swift; sourceTree = "<group>"; };
 		35B7581129AA409300C94902 /* moonAR.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = moonAR.scnassets; sourceTree = "<group>"; };
 		35B7581329AA41FE00C94902 /* MoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonViewController.swift; sourceTree = "<group>"; };
 		35B8D2F12D75D0DD0087B27F /* GeomagneticForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeomagneticForecastView.swift; sourceTree = "<group>"; };
@@ -91,7 +117,18 @@
 		F5D95F52336378FD2872CA83 /* Pods-Moonlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonlight.debug.xcconfig"; path = "Target Support Files/Pods-Moonlight/Pods-Moonlight.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3595C6A32D8702BE0071E5BC /* Moonlight Phase Watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Moonlight Phase Watch Watch App"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		3595C69F2D8702BE0071E5BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		35C2F2792976CA7B0015860F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -127,6 +164,7 @@
 				35C2F27E2976CA7B0015860F /* Moonlight */,
 				35C2F28F2976CA7F0015860F /* MoonlightTests */,
 				35C2F2992976CA7F0015860F /* MoonlightUITests */,
+				3595C6A32D8702BE0071E5BC /* Moonlight Phase Watch Watch App */,
 				35C2F27D2976CA7B0015860F /* Products */,
 				9A0B7B438225AF039CA95078 /* Pods */,
 				463EDE09F6B14D241A09EDCE /* Frameworks */,
@@ -139,6 +177,7 @@
 				35C2F27C2976CA7B0015860F /* Moonlight.app */,
 				35C2F28C2976CA7F0015860F /* MoonlightTests.xctest */,
 				35C2F2962976CA7F0015860F /* MoonlightUITests.xctest */,
+				3595C6A22D8702BE0071E5BC /* Moonlight Phase Watch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,6 +277,7 @@
 				35C2F2812976CA7B0015860F /* MainContentView.swift */,
 				35C2F2DC2977FED40015860F /* MoonView.swift */,
 				35B8D2F12D75D0DD0087B27F /* GeomagneticForecastView.swift */,
+				3595C6BA2D8706640071E5BC /* GeomagneticViewModel.swift */,
 				35B7581329AA41FE00C94902 /* MoonViewController.swift */,
 				35C2F2AE2976CC690015860F /* MoonlightViewModel.swift */,
 			);
@@ -267,6 +307,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3595C6A12D8702BE0071E5BC /* Moonlight Phase Watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3595C6B32D8702C00071E5BC /* Build configuration list for PBXNativeTarget "Moonlight Phase Watch Watch App" */;
+			buildPhases = (
+				3595C69E2D8702BE0071E5BC /* Sources */,
+				3595C69F2D8702BE0071E5BC /* Frameworks */,
+				3595C6A02D8702BE0071E5BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3595C6A32D8702BE0071E5BC /* Moonlight Phase Watch Watch App */,
+			);
+			name = "Moonlight Phase Watch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "Moonlight Phase Watch Watch App";
+			productReference = 3595C6A22D8702BE0071E5BC /* Moonlight Phase Watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		35C2F27B2976CA7B0015860F /* Moonlight */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35C2F2A02976CA7F0015860F /* Build configuration list for PBXNativeTarget "Moonlight" */;
@@ -275,10 +337,12 @@
 				35C2F2782976CA7B0015860F /* Sources */,
 				35C2F2792976CA7B0015860F /* Frameworks */,
 				35C2F27A2976CA7B0015860F /* Resources */,
+				3595C6B02D8702C00071E5BC /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3595C6AE2D8702C00071E5BC /* PBXTargetDependency */,
 			);
 			name = Moonlight;
 			packageProductDependencies = (
@@ -334,9 +398,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					3595C6A12D8702BE0071E5BC = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					35C2F27B2976CA7B0015860F = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -372,11 +439,19 @@
 				35C2F27B2976CA7B0015860F /* Moonlight */,
 				35C2F28B2976CA7F0015860F /* MoonlightTests */,
 				35C2F2952976CA7F0015860F /* MoonlightUITests */,
+				3595C6A12D8702BE0071E5BC /* Moonlight Phase Watch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3595C6A02D8702BE0071E5BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		35C2F27A2976CA7B0015860F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -433,6 +508,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3595C69E2D8702BE0071E5BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3595C6B42D8703710071E5BC /* Date+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		35C2F2782976CA7B0015860F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -447,6 +530,7 @@
 				35C2F2E3297935030015860F /* Date+Extensions.swift in Sources */,
 				35C2F2802976CA7B0015860F /* MoonlightApp.swift in Sources */,
 				3593B1A52D75BEA7008E2AB4 /* AppOpenAdManager.swift in Sources */,
+				3595C6BB2D8706640071E5BC /* GeomagneticViewModel.swift in Sources */,
 				35C2F2B62976DA330015860F /* View+Extensions.swift in Sources */,
 				35C2F2DD2977FED40015860F /* MoonView.swift in Sources */,
 				35C2F2B32976CCC40015860F /* AnimatedSplashScreen.swift in Sources */,
@@ -473,6 +557,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3595C6AE2D8702C00071E5BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3595C6A12D8702BE0071E5BC /* Moonlight Phase Watch Watch App */;
+			targetProxy = 3595C6AD2D8702C00071E5BC /* PBXContainerItemProxy */;
+		};
 		35C2F28E2976CA7F0015860F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 35C2F27B2976CA7B0015860F /* Moonlight */;
@@ -498,6 +587,75 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3595C6B12D8702C00071E5BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_ASSET_PATHS = "\"Moonlight Phase Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 4N3M37Y7LY;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Moonlight Phase Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = world.newdigital.Moonlight;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		3595C6B22D8702C00071E5BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_ASSET_PATHS = "\"Moonlight Phase Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 4N3M37Y7LY;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Moonlight Phase Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = world.newdigital.Moonlight;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
 		35C2F29E2976CA7F0015860F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -621,7 +779,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Moonlight/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N3M37Y7LY;
 				ENABLE_PREVIEWS = YES;
@@ -640,7 +798,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -659,7 +817,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Moonlight/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N3M37Y7LY;
 				ENABLE_PREVIEWS = YES;
@@ -678,7 +836,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -769,6 +927,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3595C6B32D8702C00071E5BC /* Build configuration list for PBXNativeTarget "Moonlight Phase Watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3595C6B12D8702C00071E5BC /* Debug */,
+				3595C6B22D8702C00071E5BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		35C2F2772976CA7B0015860F /* Build configuration list for PBXProject "Moonlight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
