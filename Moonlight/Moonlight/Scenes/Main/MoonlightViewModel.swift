@@ -9,7 +9,11 @@ import SwiftUI
 
 class MoonlightViewModel: ObservableObject {
     @Published var currentMoonPhaseValue = 0.0
-    @Published var selectedDate = Date()
+    @Published var selectedDate = Date() {
+        didSet {
+            updateCurrentMoonPhaseValue()
+        }
+    }
 
     init() {
         updateCurrentMoonPhaseValue()
@@ -33,5 +37,6 @@ class MoonlightViewModel: ObservableObject {
     func moveOn(_ days: Int) {
         selectedDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) ?? selectedDate
         updateCurrentMoonPhaseValue()
+        objectWillChange.send()
     }
 }

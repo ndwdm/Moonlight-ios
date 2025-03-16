@@ -44,11 +44,11 @@ struct AnimatedSplashScreen<Content: View>: View {
                                 .fill(color)
                                 .matchedGeometryEffect(id: "SplashColor", in: animation)
                             MoonView()
+                                .environmentObject(viewModel)
                                 .aspectRatio(contentMode: .fill)
                                 .matchedGeometryEffect(id: "SplashIcon", in: animation)
                                 .padding(.top, topOffset)
                                 .padding(.leading, animateContent ? 0 : -size.height / 2)
-                                .onChange(of: viewModel.currentMoonPhaseValue) { _ in }
                         }
                         .ignoresSafeArea(.container, edges: .all)
                     }
@@ -89,11 +89,5 @@ struct AnimatedSplashScreen<Content: View>: View {
                 }
             }
         }
-    }
-}
-
-struct AnimatedSplashScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        MainContentView()
     }
 }

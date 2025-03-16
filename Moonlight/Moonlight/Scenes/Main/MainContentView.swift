@@ -12,7 +12,7 @@ struct MainContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @AppStorage("launchAppCount") private var launchAppCount = 0
 
-    @ObservedObject private var viewModel = MoonlightViewModel()
+    @StateObject var viewModel: MoonlightViewModel = MoonlightViewModel()
 
     var body: some View {
         let dragGesture = DragGesture()
@@ -73,7 +73,6 @@ struct MainContentView: View {
             }
             .padding(0)
         } onAnimationEnd: {}
-        .onChange(of: viewModel.currentMoonPhaseValue) { _ in }
         .environmentObject(viewModel)
         .gesture(dragGesture)
         .onChange(of: scenePhase) { newPhase in
@@ -88,11 +87,5 @@ struct MainContentView: View {
                 }
             }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainContentView()
     }
 }
