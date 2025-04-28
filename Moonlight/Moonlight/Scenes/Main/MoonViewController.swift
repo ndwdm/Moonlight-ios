@@ -51,13 +51,6 @@ final class MoonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleSceneWillEnterForeground),
-            name: UIScene.willEnterForegroundNotification,
-            object: nil
-        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -70,18 +63,28 @@ final class MoonViewController: UIViewController {
         arMoonSceneView.session.pause()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            guard let self else { return }
+
+            mainMoonSceneView.frame = .init(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 2)
+            mainMoonSceneView.center.x = view.bounds.width / 2
+
+            arMoonSceneView.frame = view.bounds
+
+            guard let bannerView else { return }
+            bannerView.frame.origin.y = view.frame.height - 100
+            bannerView.center.x = view.bounds.width / 2
+        })
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
     func updateCurrentMoonPhase() {
         animatePhaseLightChange(with: viewModel?.currentMoonPhaseValue ?? 0)
-    }
-
-    // MARK: - Actions
-
-    @objc private func handleSceneWillEnterForeground(_ notification: Notification) {
-        AppOpenAdManager.shared.showAdIfAvailable()
     }
 }
 

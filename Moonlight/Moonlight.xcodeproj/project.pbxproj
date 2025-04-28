@@ -37,7 +37,6 @@
 		35C67C752A9A20D000C83E96 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C742A9A20D000C83E96 /* FirebaseAnalytics */; };
 		35C67C772A9A20D000C83E96 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C762A9A20D000C83E96 /* FirebaseCrashlytics */; };
 		35C67C7F2A9A291F00C83E96 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 35C67C7E2A9A291F00C83E96 /* GoogleMobileAds */; };
-		D8568AD6118421339012C4C4 /* Pods_Moonlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1E83DA75ECE2FB9B9A1702 /* Pods_Moonlight.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,9 +111,7 @@
 		35C2F2E2297935030015860F /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		35C2F2E42979AFAC0015860F /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		35C67C712A9A1C0000C83E96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		507817B3CBA572016E9F2D70 /* Pods-Moonlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonlight.release.xcconfig"; path = "Target Support Files/Pods-Moonlight/Pods-Moonlight.release.xcconfig"; sourceTree = "<group>"; };
 		DA1E83DA75ECE2FB9B9A1702 /* Pods_Moonlight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moonlight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5D95F52336378FD2872CA83 /* Pods-Moonlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonlight.debug.xcconfig"; path = "Target Support Files/Pods-Moonlight/Pods-Moonlight.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -136,7 +133,6 @@
 				35C67C7F2A9A291F00C83E96 /* GoogleMobileAds in Frameworks */,
 				35C67C752A9A20D000C83E96 /* FirebaseAnalytics in Frameworks */,
 				35C67C772A9A20D000C83E96 /* FirebaseCrashlytics in Frameworks */,
-				D8568AD6118421339012C4C4 /* Pods_Moonlight.framework in Frameworks */,
 				3593B1A82D75C7AF008E2AB4 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +162,6 @@
 				35C2F2992976CA7F0015860F /* MoonlightUITests */,
 				3595C6A32D8702BE0071E5BC /* Moonlight Phase Watch Watch App */,
 				35C2F27D2976CA7B0015860F /* Products */,
-				9A0B7B438225AF039CA95078 /* Pods */,
 				463EDE09F6B14D241A09EDCE /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -295,15 +290,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9A0B7B438225AF039CA95078 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F5D95F52336378FD2872CA83 /* Pods-Moonlight.debug.xcconfig */,
-				507817B3CBA572016E9F2D70 /* Pods-Moonlight.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -333,7 +319,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35C2F2A02976CA7F0015860F /* Build configuration list for PBXNativeTarget "Moonlight" */;
 			buildPhases = (
-				C20A0867A2650A6CBF69F5E7 /* [CP] Check Pods Manifest.lock */,
 				35C2F2782976CA7B0015860F /* Sources */,
 				35C2F2792976CA7B0015860F /* Frameworks */,
 				35C2F27A2976CA7B0015860F /* Resources */,
@@ -482,31 +467,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		C20A0867A2650A6CBF69F5E7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Moonlight-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		3595C69E2D8702BE0071E5BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -594,7 +554,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Moonlight Phase Watch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N3M37Y7LY;
 				ENABLE_PREVIEWS = YES;
@@ -609,7 +569,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -629,7 +589,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Moonlight Phase Watch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N3M37Y7LY;
 				ENABLE_PREVIEWS = YES;
@@ -644,7 +604,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -774,12 +734,11 @@
 		};
 		35C2F2A12976CA7F0015860F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5D95F52336378FD2872CA83 /* Pods-Moonlight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Moonlight/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N3M37Y7LY;
 				ENABLE_PREVIEWS = YES;
@@ -798,7 +757,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -806,18 +765,17 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		35C2F2A22976CA7F0015860F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 507817B3CBA572016E9F2D70 /* Pods-Moonlight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Moonlight/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N3M37Y7LY;
 				ENABLE_PREVIEWS = YES;
@@ -836,7 +794,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = world.newdigital.Moonlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -844,7 +802,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
