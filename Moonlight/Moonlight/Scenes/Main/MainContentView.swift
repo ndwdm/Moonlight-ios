@@ -29,46 +29,50 @@ struct MainContentView: View {
                 alignment: .center,
                 spacing: 0
             ) {
-                Text(viewModel.selectedDate, style: .date)
-                    .font(.title)
-                Text("\(NSLocalizedString("General.moonDay", comment: "")): \(Int(viewModel.currentMoonPhaseValue.rounded(.up))) " + Int(viewModel.currentMoonPhaseValue.rounded(.up)).symbolForMoon)
-                    .font(.subheadline)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
                 Spacer()
-                GeomagneticForecastView()
-                Spacer()
-                HStack {
-                    Image("tap")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .aspectRatio(contentMode: .fit)
-                    Text(NSLocalizedString("General.tap", comment: ""))
-                        .font(.subheadline)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                }
 
-                HStack {
-                    Spacer()
-                    Image("swipe")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                    Text(NSLocalizedString("General.swipe", comment: ""))
+                VStack(spacing: 16) {
+                    Text(viewModel.selectedDate, style: .date)
+                        .font(.title)
+                    Text("\(NSLocalizedString("General.moonDay", comment: "")): \(Int(viewModel.currentMoonPhaseValue.rounded(.up))) " + Int(viewModel.currentMoonPhaseValue.rounded(.up)).symbolForMoon)
                         .font(.subheadline)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
 
-                    Image("pinch")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .aspectRatio(contentMode: .fit)
-                    Text(NSLocalizedString("General.pinch", comment: ""))
-                        .font(.subheadline)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                    Spacer()
+                    GeomagneticForecastView()
+
+                    HStack {
+                        Image("tap")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .aspectRatio(contentMode: .fit)
+                        Text(NSLocalizedString("General.tap", comment: ""))
+                            .font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .multilineTextAlignment(.center)
+                    }
+
+                    HStack {
+                        Spacer()
+                        Image("swipe")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                        Text(NSLocalizedString("General.swipe", comment: ""))
+                            .font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .multilineTextAlignment(.center)
+
+                        Image("pinch")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .aspectRatio(contentMode: .fit)
+                        Text(NSLocalizedString("General.pinch", comment: ""))
+                            .font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                    }.padding(.bottom, 120)
                 }
             }
             .padding(0)

@@ -54,10 +54,8 @@ struct AnimatedSplashScreen<Content: View>: View {
                     }
                     .frame(maxHeight: .infinity, alignment: .top)
                     ZStack {
-                            content
-                            .padding(.bottom, animateContent ? size.height : proxy.size.height / 2)
+                        content
                     }
-                    .offset(y: proxy.size.height / 2 - 40)
                 }
                 .transition(.identity)
                 .ignoresSafeArea(.container, edges: .all)
