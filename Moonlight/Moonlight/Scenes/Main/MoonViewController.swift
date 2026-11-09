@@ -71,8 +71,6 @@ final class MoonViewController: UIViewController {
             mainMoonSceneView.frame = .init(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 2)
             mainMoonSceneView.center.x = view.bounds.width / 2
 
-            arMoonSceneView.frame = view.bounds
-
             guard let bannerView else { return }
             bannerView.frame.origin.y = view.frame.height - 100
             bannerView.center.x = view.bounds.width / 2
@@ -130,11 +128,14 @@ private extension MoonViewController {
         shadowingMoon(for: moonARNode, mode: .ar)
         view.addSubview(arMoonSceneView)
         arMoonSceneView.layer.zPosition = 4
-        arMoonSceneView.frame = view.bounds
         arMoonSceneView.alpha = 0
         arMoonSceneView.delegate = self
         arMoonSceneView.scene.rootNode.addChildNode(moonARNode)
         arMoonSceneView.autoenablesDefaultLighting = true
+        
+        arMoonSceneView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     func setupMoon(for node: SCNNode, with radius: Double) {
